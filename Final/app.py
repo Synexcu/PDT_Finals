@@ -8,6 +8,7 @@ from db import db_connection
 app = Flask(__name__)
 app.secret_key = 'HELPMEPLS'  # create the unique one for yourself
 
+test
 @app.route('/')
 def index():
     conn = db_connection()
