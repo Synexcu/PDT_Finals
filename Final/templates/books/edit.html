@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/books/edit/{{ book[0] }}" method="POST">
+    <div class="row mb-3">
+        <label for="title" class="col-2 col-form-label">Title</label>
+        <div class="col-6">
+            <input type="text" name="title" id="title" class="form-control" placeholder="book Title" value="{{ book[1] }}" required/>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="author" class="col-2 col-form-label">Author</label>
+        <div class="col-6">
+            <input type="text" name="author" id="author" class="form-control" placeholder="Book author" value="{{ book[2] }}"  required/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-2 col-6">
+            <button class="btn btn-success" type="submit" name="btnEdit" id="btnEdit">Save</button>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a href="{{ url_for('index') }}">Back</a>
+</div>
+{% endblock %}
