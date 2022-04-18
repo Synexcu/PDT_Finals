@@ -147,6 +147,44 @@ def create():
         return jsonify({'status': 500, 'message': 'No Data submitted'})
     return render_template('books/create.html')
 
+@app.route('/books/edit/<int:book_id>', methods=['GET', 'POST'])
+def edit(book_id):
+    # check if user is logged in
+    if not session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        conn = db_connection()
+        cur = conn.cursor()
+
+        title = request.form['title']
+        author = request.form['author']
+
+        title = title.strip()
+        author = author.strip()
+
+        sql_params = (title, author, book_id)
+
+        sql = "UPDATE books SET title = '%s', author = '%s' WHERE id = %s" % sql_params
+        print(sql)
+        cur.execute(sql)
+        cur.close()
+        conn.commit()
+        conn.close()
+        # use redirect to go to certain url. url_for function accepts the
+        # function name of the URL which is function index() in this case
+        return redirect(url_for('index'))
+
+    # find the record first
+    conn = db_connection()
+    cur = conn.cursor()
+    sql = 'SELECT id, title, author FROM books WHERE id = %s' % book_id
+    cur.execute(sql)
+    book = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    return render_template('books/edit.html', book=book)
 
 @app.route('/book/delete/<int:book_id>', methods=['GET', 'POST'])
 def delete(book_id):
