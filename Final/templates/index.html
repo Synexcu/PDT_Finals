@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% if books %}
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" ></th>
+                    <th scope="col" width = "30%">Title</th>
+                    <th scope="col" >Author</th>
+                    <th scope="col">Status</th>
+                 </tr>
+            </thead>
+            <tbody>
+                {% for (title, author, status, book_id) in books %}
+                <tr>
+                    <th scope="row">
+                        <a href="{{ url_for('read', book_id=book_id) }}">View Detail</a>
+                        <a class="btn btn-warning" href="{{ url_for('edit', book_id=book_id) }}">Edit</a>
+                        <button type="button" class="btn btn-danger" onclick="deleteBook({{ book_id }}, {{ '\"%s\"' % title }})">Delete</button>
+                    </th>
+                    <td>
+                        {{ title }}
+                    </td>
+                    <td>
+                        {{ author }}                       
+                    </td>
+                    <td>
+                        {{ status }}                       
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            {% else %}
+            <h1>No Books Found</h1>
+        {% endif %}
+        
+        {% if session and session.get('username') %}
+        <div>
+            <a class="btn btn-success" href="{{ url_for('create') }}">Create</a>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
