@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if book %}
+{{ book[0] }}
+{% else %}
+Flask App
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% if book %}
+    <h2>{{ book[0] }}</h2>
+    <p>
+        By: {{ book[1] }}
+    </p>
+    <p>
+        Status: {{ book[2] }}
+    </p>
+    {% else %}
+    <h3>
+        Invalid book
+    </h3>
+    {% endif %}
+</div>
+
+<div>
+    <a href="{{ url_for('index') }}">Back</a>
+</div>
+{% endblock %}
