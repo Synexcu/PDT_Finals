@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form>
+    <div class="row mb-3">
+        <label for="title" class="col-2 col-form-label">Title</label>
+        <div class="col-6">
+            <input type="text" name="title" id="title" class="form-control" placeholder="Book Title" required/>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="author" class="col-2 col-form-label">Author</label>
+        <div class="col-6">
+            <input type="text" name="author" id="author" class="form-control" placeholder="Book author" required/>
+        </div>
+    </div>
+    {% block button %}{% endblock %}
+</form>
+
+<div>
+    <a class="link-primary" href="{{ url_for('index') }}">Back</a>
+</div>
+{% endblock %}
