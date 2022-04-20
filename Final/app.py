@@ -171,11 +171,9 @@ def edit(book_id):
         cur.close()
         conn.commit()
         conn.close()
-        # use redirect to go to certain url. url_for function accepts the
-        # function name of the URL which is function index() in this case
+
         return redirect(url_for('index'))
 
-    # find the record first
     conn = db_connection()
     cur = conn.cursor()
     sql = 'SELECT id, title, author FROM books WHERE id = %s' % book_id

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+Borrow History 
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-3">
+        {% if not history %}
+        <p>
+            <h2>No History</h2>
+        </p>
+        {% else %}
+        <p>
+            List of History
+        </p>
+        <table class="table table-sm table-borderless">
+            <thead>
+                {% for users_username, books_title , history_borrow_date in history %}
+                <tr>
+                    <td>{{ users_username }}</td>
+                    <td>{{ books_title }}</td>
+                    <td>{{ history_borrow_date }}</td>
+                </tr>
+                {% endfor %}
+            </thead>
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+<div class="mt-5">
+    <a href="{{ url_for('index') }}">Home</a>
+</div>
+{% endblock %}
